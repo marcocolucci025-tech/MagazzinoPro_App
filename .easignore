@@ -1,7 +1,20 @@
+# MagazzinoPro - File .easignore pronto per Windows
+
+# Ignora tutto ciò che può causare errori o blocchi durante la build
 node_modules
-npm-debug.log
-yarn-error.log
 firebase-debug.log
+.expo
+.expo-shared
+.firebase
+.git
+.gitignore
+screens
+assets
+functions
 functions/.firebase
 functions/node_modules
 functions/.runtimeconfig.json
+dist
+.tmp
+temp
+__tests__
