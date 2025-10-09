@@ -5,7 +5,7 @@ buildscript {
         compileSdkVersion = findProperty('android.compileSdkVersion')?.toInteger() ?: 34
         targetSdkVersion = findProperty('android.targetSdkVersion')?.toInteger() ?: 34
         ndkVersion = findProperty('android.ndkVersion') ?: '25.1.8937393'
-        kotlinVersion = '1.8.22'
+        kotlinVersion = '1.9.0'
     }
     repositories {
         google()
@@ -13,7 +13,7 @@ buildscript {
     }
     dependencies {
         classpath("com.android.tools.build:gradle:8.3.0")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.22")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("com.google.gms:google-services:4.3.15")
     }
@@ -28,4 +28,12 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+subprojects {
+    afterEvaluate { project ->
+        if (project.hasProperty("kotlinOptions")) {
+            project.kotlinOptions.freeCompilerArgs += ["-Xskip-metadata-version-check"]
+        }
+    }
 }
