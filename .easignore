@@ -1,0 +1,7 @@
+node_modules
+npm-debug.log
+yarn-error.log
+firebase-debug.log
+functions/.firebase
+functions/node_modules
+functions/.runtimeconfig.json

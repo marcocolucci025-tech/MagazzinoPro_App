@@ -1,0 +1,1 @@
+Segui la guida fornita nella chat per setup Firebase, install dependencies, deploy functions e build EAS.

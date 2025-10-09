@@ -1,0 +1,23 @@
+{
+  "expo": {
+    "name": "MagazzinoPro",
+    "slug": "magazzinopro",
+    "version": "1.0.0",
+    "sdkVersion": "48.0.0",
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "ios": {
+      "bundleIdentifier": "com.tuaazienda.magazzinopro"
+    },
+    "android": {
+      "package": "com.tuaazienda.magazzinopro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "603f0af3-99fe-4ba6-82d5-385655d45aff"
+      }
+    }
+  }
+}
