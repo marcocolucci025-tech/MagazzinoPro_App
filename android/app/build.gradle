@@ -4,9 +4,6 @@ apply plugin: "com.facebook.react"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
 
-/**
- * Configurazione di React Native / Expo
- */
 react {
     entryFile = file(["node", "-e", "require('expo/scripts/resolveAppEntry')", projectRoot, "android", "absolute"].execute(null, rootDir).text.trim())
     reactNativeDir = new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim()).getParentFile().getAbsoluteFile()
@@ -50,7 +47,6 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            // In produzione usa un keystore personalizzato
             signingConfig signingConfigs.debug
             shrinkResources (findProperty('android.enableShrinkResourcesInReleaseBuilds')?.toBoolean() ?: false)
             minifyEnabled enableProguardInReleaseBuilds
@@ -65,7 +61,6 @@ android {
     }
 }
 
-// Applica eventuali opzioni statiche definite in gradle.properties
 ["pickFirsts", "excludes", "merges", "doNotStrip"].each { prop ->
     def options = (findProperty("android.packagingOptions.$prop") ?: "").split(",")
     for (i in 0..<options.size()) options[i] = options[i].trim()
@@ -77,7 +72,6 @@ android {
 }
 
 dependencies {
-    // La versione di react-native è gestita automaticamente dal plugin React Native
     implementation("com.facebook.react:react-android")
 
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true"
@@ -102,3 +96,9 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+/**
+ * RIMOSSE righe obsolete che causavano errori con @react-native-community:
+ *  - native_modules.gradle
+ *  - applyNativeModulesAppBuildGradle(project)
+ */
