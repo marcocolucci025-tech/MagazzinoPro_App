@@ -4,11 +4,8 @@ apply from: new File(["node", "--print", "require.resolve('expo/package.json')"]
     .execute(null, rootDir).text.trim(), "../scripts/autolinking.gradle");
 useExpoModules()
 
-// RIMOSSE righe obsolete verso @react-native-community/native_modules.gradle
-
 include(":app")
 
-// React Native Gradle Plugin (con controllo esistenza)
 def reactNativeGradlePluginDir = new File(["node", "--print",
     "require.resolve('react-native-gradle-plugin/package.json')"]
     .execute(null, rootDir).text.trim()).getParentFile()
@@ -16,5 +13,5 @@ def reactNativeGradlePluginDir = new File(["node", "--print",
 if (reactNativeGradlePluginDir && reactNativeGradlePluginDir.exists()) {
     includeBuild(reactNativeGradlePluginDir)
 } else {
-    println("⚠  RN Gradle plugin non trovato, continuo senza includeBuild.")
+    println("⚠ RN Gradle plugin non trovato, continuo senza includeBuild.")
 }

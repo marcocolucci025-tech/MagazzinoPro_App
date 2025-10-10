@@ -97,8 +97,5 @@ dependencies {
     }
 }
 
-/**
- * RIMOSSE righe obsolete che causavano errori con @react-native-community:
- *  - native_modules.gradle
- *  - applyNativeModulesAppBuildGradle(project)
- */
+// Abilita Google Services (Auth + Realtime DB)
+apply plugin: 'com.google.gms.google-services'

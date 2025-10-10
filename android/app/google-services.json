@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1036019166025",
+    "project_id": "magazzinopro",
+    "storage_bucket": "magazzinopro.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1036019166025:android:39f09874f9b80e6ad3c898",
+        "android_client_info": {
+          "package_name": "com.tuaazienda.magazzinopro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1036019166025-o88j60an487fp7ttucgkqqept9kbm5h2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBjgJ04z6vfVatR964iiGZ44fr2aWD5vj4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1036019166025-o88j60an487fp7ttucgkqqept9kbm5h2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
