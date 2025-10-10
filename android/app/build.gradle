@@ -71,6 +71,8 @@ android {
     }
 }
 
+def hermesEnabled = true   // ✅ Variabile definita nel punto corretto
+
 dependencies {
     implementation("com.facebook.react:react-android")
 
@@ -97,5 +99,5 @@ dependencies {
     }
 }
 
-// Abilita Google Services (Auth + Realtime DB)
+// 🔹 Attiva Google Services (Firebase Auth + Realtime DB)
 apply plugin: 'com.google.gms.google-services'
