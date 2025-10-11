@@ -3,7 +3,7 @@ module.exports = function (api) {
   return {
     presets: ['babel-preset-expo'],
     plugins: [
-      // Se usi react-native-reanimated, tieni questa riga:
+      // Se usi react-native-reanimated, lascia questa riga
       'react-native-reanimated/plugin',
     ],
   };
