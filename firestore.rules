@@ -1,19 +1,52 @@
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // This rule allows anyone with your Firestore database reference to view, edit,
-    // and delete all data in your Firestore database. It is useful for getting
-    // started, but it is configured to expire after 30 days because it
-    // leaves your app open to attackers. At that time, all client
-    // requests to your Firestore database will be denied.
-    //
-    // Make sure to write security rules for your app before that time, or else
-    // all client requests to your Firestore database will be denied until you Update
-    // your rules
-    match /{document=**} {
-      allow read, write: if request.time < timestamp.date(2025, 11, 3);
+    // roles collection: docId = uid, { role: "admin"|"magazziniere"|"user" }
+    match /roles/{userId} {
+      allow read: if request.auth != null && request.auth.uid == userId;
+      // admin può scrivere ruoli (gestione tramite UI admin o script server)
+      allow write: if isAdmin();
+    }
+
+    // Warehouses collection
+    match /warehouses/{warehouseId} {
+      allow read: if request.auth != null;
+      allow create: if isAdmin();
+      allow update, delete: if isAdmin();
+
+      // items subcollection
+      match /items/{itemId} {
+        allow read: if request.auth != null;
+        allow create: if isAdmin();
+        allow delete: if isAdmin();
+
+        // update:
+        // - admin può aggiornare qualsiasi campo
+        // - magazziniere può soltanto modificare 'quantity' e 'updatedAt'
+        allow update: if isAdmin() || (isMagazziniere() && onlyQuantityChanged());
+      }
+    }
+
+    function getRole() {
+      return request.auth != null && exists(/databases/$(database)/documents/roles/$(request.auth.uid))
+        ? get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.role
+        : null;
+    }
+
+    function isAdmin() {
+      return request.auth != null && getRole() == "admin";
+    }
+
+    function isMagazziniere() {
+      return request.auth != null && getRole() == "magazziniere";
+    }
+
+    function onlyQuantityChanged() {
+      // Permette update solo se le chiavi modificate sono quantity e/o updatedAt
+      return request.resource.data.keys().hasAll(['quantity']) &&
+             // non permettere modifiche ad altri campi rispetto a quantity e updatedAt
+             request.resource.data.keys().difference(['quantity', 'updatedAt']).size() == 0;
     }
   }
 }
